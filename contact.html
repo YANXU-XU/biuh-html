@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch — email, location, and social links.">
+    <title>Contact · Learning by doing</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+      (function () {
+        try {
+          const saved = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        } catch (e) {}
+      })();
+    </script>
+</head>
+<body>
+
+    <header id="site-header">
+        <div id="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true">
+              <path d="M5.8 11.3 2 22l10.7-3.79"/>
+              <path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/>
+              <path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/>
+              <path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"/>
+              <path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/>
+              <path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"/>
+            </svg>
+            <a href="index.html">Learning by doing</a>
+        </div>
+
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="quotes.html">Quotes</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+            </ul>
+        </nav>
+
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+    </header>
+
+    <main>
+        <h1>Get In Touch</h1>
+        <p class="lead">
+            Have a question, an idea, or just want to say hi? Drop me a message below.
+        </p>
+
+        <div class="contact-layout">
+            <aside class="contact-info">
+                <div class="info-card reveal">
+                    <h2>Email</h2>
+                    <p><a href="mailto:student@example.com">student@example.com</a></p>
+                </div>
+                <div class="info-card reveal">
+                    <h2>Location</h2>
+                    <p>BIUH campus</p>
+                </div>
+                <div class="info-card reveal">
+                    <h2>Social</h2>
+                    <p><a href="#" target="_blank" rel="noopener">Photography portfolio online</a></p>
+                </div>
+            </aside>
+
+            <section class="contact-form-wrap reveal">
+                <h2>Send a Message</h2>
+                <form id="contact-form" novalidate>
+                    <div class="form-row">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required minlength="2"
+                               autocomplete="name" placeholder="Your name">
+                        <span class="error" data-for="name"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required
+                               autocomplete="email" placeholder="you@example.com">
+                        <span class="error" data-for="email"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required minlength="10"
+                                  placeholder="Write your message..."></textarea>
+                        <span class="error" data-for="message"></span>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Send Message</button>
+                    <p class="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer id="site-footer">
+        <p>&copy; <span id="year"></span> Learning by doing · Built with &hearts;</p>
+    </footer>
+
+    <script src="nav.js" defer></script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

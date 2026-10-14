@@ -1,0 +1,241 @@
+/* ============================================
+   nav.js —— 导航 + 页脚注入 + 全站交互
+   - 无需服务器，file:// 也能工作
+   - 自带：主题切换 / 汉堡菜单 / 当前页高亮
+           / 回到顶部 / 滚动淡入 / 复制语录 / 表单校验
+   ============================================ */
+
+(function () {
+  'use strict';
+
+  /* ---------- 1. 页面配置 ---------- */
+const NAV_LINKS = [
+    { href: 'index.html',   label: 'Home'     },
+    { href: 'quotes.html',  label: 'Quotes'   },
+    { href: 'project.html', label: 'Projects' },
+    { href: 'contact.html', label: 'Contact'  },
+  ];
+
+  const currentPage = location.pathname.split('/').pop() || 'index.html';
+
+  /* ---------- 2. 导航模板 ---------- */
+  function buildNav() {
+    const links = NAV_LINKS.map(link => {
+      const isActive = link.href === currentPage
+        ? ' class="active" aria-current="page"'
+        : '';
+      return `<li><a href="${link.href}"${isActive}>${link.label}</a></li>`;
+    }).join('');
+
+    return `
+      <div id="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M5.8 11.3 2 22l10.7-3.79"/>
+          <path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/>
+          <path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/>
+          <path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"/>
+          <path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/>
+          <path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"/>
+        </svg>
+        <a href="index.html">Learning by doing</a>
+      </div>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav aria-label="Main navigation">
+        <ul>${links}</ul>
+      </nav>
+
+      <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    `;
+  }
+
+  /* ---------- 3. 页脚模板 ---------- */
+  function buildFooter() {
+    const year = new Date().getFullYear();
+    return `<p>&copy; ${year} Learning by doing · Built with &hearts;</p>`;
+  }
+
+  /* ---------- 4. 注入 ---------- */
+  function inject() {
+    const header = document.getElementById('site-header');
+    const footer = document.getElementById('site-footer');
+    if (header) header.innerHTML = buildNav();
+    if (footer) footer.innerHTML = buildFooter();
+  }
+
+  /* ---------- 5. 汉堡菜单 ---------- */
+  function initMobileMenu() {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('header nav');
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // 点击导航链接后自动关闭菜单
+    nav.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  /* ---------- 6. 主题切换 ---------- */
+  function initTheme() {
+    const toggle = document.querySelector('.theme-toggle');
+    const root = document.documentElement;
+    if (!toggle) return;
+
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  }
+
+  /* ---------- 7. 回到顶部 ---------- */
+  function initBackToTop() {
+    const btn = document.createElement('button');
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = '&uarr;';
+    document.body.appendChild(btn);
+
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ---------- 8. 滚动淡入 ---------- */
+  function initRevealOnScroll() {
+    const targets = document.querySelectorAll('.reveal');
+    if (!targets.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(el => el.classList.add('visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    targets.forEach(el => observer.observe(el));
+  }
+
+  /* ---------- 9. 复制语录 ---------- */
+  function initCopyQuotes() {
+    const buttons = document.querySelectorAll('.copy-btn');
+    if (!buttons.length) return;
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const card = btn.closest('.quote');
+        const text = card && card.dataset.quote;
+        if (!text) return;
+
+        try {
+          await navigator.clipboard.writeText(text);
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove('copied');
+          }, 1500);
+        } catch (err) {
+          btn.textContent = 'Select & Copy';
+          setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+        }
+      });
+    });
+  }
+
+  /* ---------- 10. 表单校验 ---------- */
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const fields = {
+      name:    { el: form.name,    test: v => v.trim().length >= 2,  msg: 'Please enter at least 2 characters.' },
+      email:   { el: form.email,   test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), msg: 'Please enter a valid email address.' },
+      message: { el: form.message, test: v => v.trim().length >= 10, msg: 'Message must be at least 10 characters.' },
+    };
+
+    function showError(key, msg) {
+      const el = document.querySelector(`.error[data-for="${key}"]`);
+      if (el) el.textContent = msg || '';
+      fields[key].el.classList.toggle('invalid', Boolean(msg));
+    }
+
+    Object.keys(fields).forEach(key => {
+      fields[key].el.addEventListener('input', () => showError(key, ''));
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+
+      Object.entries(fields).forEach(([key, { el, test, msg }]) => {
+        if (!test(el.value)) {
+          showError(key, msg);
+          valid = false;
+        }
+      });
+
+      const status = form.querySelector('.form-status');
+      if (valid) {
+        status.textContent = '✅ Thanks! Your message has been sent (demo).';
+        status.className = 'form-status success';
+        form.reset();
+      } else {
+        status.textContent = 'Please fix the errors above.';
+        status.className = 'form-status error-text';
+      }
+    });
+  }
+
+  /* ---------- 11. 启动 ---------- */
+  document.addEventListener('DOMContentLoaded', () => {
+    inject();
+    initMobileMenu();
+    initTheme();
+    initBackToTop();
+    initRevealOnScroll();
+    initCopyQuotes();
+    initContactForm();
+  });
+
+})();
