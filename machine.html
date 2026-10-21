@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A camera with one very specific trick: it takes a photo and gives it back.">
+    <title>The Useless Camera · Learning by doing</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+      (function () {
+        try {
+          const saved = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        } catch (e) {}
+      })();
+    </script>
+</head>
+<body>
+    <header id="site-header">
+        <div id="logo"><a href="index.html">Learning by doing</a></div>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="quotes.html">Quotes</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="machine.html" class="active" aria-current="page">Machine</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+    </header>
+
+    <main class="machine-page">
+        <div class="machine-heading">
+            <p class="machine-eyebrow"><span></span> A SMALL CAMERA EXPERIMENT</p>
+            <h1>The Useless Camera</h1>
+            <p class="machine-lead">Press the shutter. A little portrait comes back out.</p>
+        </div>
+
+        <section class="machine-workbench" id="machine" aria-label="Interactive Useless Camera">
+            <div class="machine-caption">
+                <span>CAMERA 001 <i></i> LOADED</span>
+                <span>50MM <i></i> READY</span>
+            </div>
+            <div class="machine-canvas">
+                <div class="machine-graphic">
+                    <svg class="machine-art" viewBox="0 0 900 440" role="img" aria-labelledby="machine-art-title machine-art-desc">
+                        <title id="machine-art-title">A retro green camera with a large lens and a red shutter</title>
+                        <desc id="machine-art-desc">The camera is ready to eject a portrait photo when its red shutter button is pressed.</desc>
+                        <defs>
+                            <linearGradient id="camera-top" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#748c79"/>
+                                <stop offset="1" stop-color="#3b594b"/>
+                            </linearGradient>
+                            <linearGradient id="camera-face" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#526f5e"/>
+                                <stop offset="1" stop-color="#263d33"/>
+                            </linearGradient>
+                            <radialGradient id="lens-glass" cx="38%" cy="32%" r="72%">
+                                <stop offset="0" stop-color="#8eb0a5"/>
+                                <stop offset="0.4" stop-color="#41675f"/>
+                                <stop offset="0.72" stop-color="#182a2b"/>
+                                <stop offset="1" stop-color="#080e11"/>
+                            </linearGradient>
+                            <filter id="camera-shadow" x="-20%" y="-20%" width="140%" height="160%">
+                                <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#27352f" flood-opacity="0.24"/>
+                            </filter>
+                        </defs>
+                        <ellipse cx="450" cy="365" rx="330" ry="30" fill="#26352e" opacity="0.12"/>
+                        <g filter="url(#camera-shadow)">
+                            <path d="M122 178q0-27 29-27h126l34-42h189l36 42h239q34 0 34 31v162q0 27-31 27H153q-31 0-31-29z" fill="url(#camera-face)" stroke="#243a30" stroke-width="4"/>
+                            <path d="M122 178q0-27 29-27h126l34-42h189l36 42h239q34 0 34 31v18H122z" fill="url(#camera-top)"/>
+                            <path d="M310 109h190l25 42H278z" fill="#334c3e" stroke="#243a30" stroke-width="3"/>
+                            <path d="M314 116h182l14 28H295z" fill="#849886" opacity="0.48"/>
+                            <rect x="175" y="190" width="86" height="50" rx="6" fill="#b7c8bd" stroke="#192a24" stroke-width="6"/>
+                            <rect x="183" y="198" width="70" height="34" rx="4" fill="#e8eadc"/>
+                            <path d="m188 226 16-17 13 12 12-14 19 19z" fill="#a4b8a9"/>
+                            <rect x="648" y="190" width="72" height="49" rx="5" fill="#182b26" stroke="#829587" stroke-width="4"/>
+                            <rect x="658" y="198" width="52" height="33" rx="3" fill="#76928a"/>
+                            <path d="M665 225h38" stroke="#d0d6c9" stroke-width="2" opacity="0.75"/>
+                            <circle cx="445" cy="255" r="112" fill="#263730" stroke="#192820" stroke-width="10"/>
+                            <circle cx="445" cy="255" r="96" fill="#a7aa98" stroke="#c4c5b4" stroke-width="4"/>
+                            <circle cx="445" cy="255" r="83" fill="#172322" stroke="#384d45" stroke-width="8"/>
+                            <circle cx="445" cy="255" r="68" fill="url(#lens-glass)" stroke="#11191a" stroke-width="5"/>
+                            <circle cx="445" cy="255" r="46" fill="none" stroke="#a8c1b5" stroke-width="2" opacity="0.42"/>
+                            <ellipse cx="426" cy="232" rx="17" ry="9" fill="#dce8da" opacity="0.36" transform="rotate(-35 426 232)"/>
+                            <path d="M347 205a112 112 0 0 1 194-9" fill="none" stroke="#f0e9d7" stroke-width="4" opacity="0.8"/>
+                            <text x="445" y="166" text-anchor="middle" fill="#d9ddcd" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3">50 MM  ·  1:2.8</text>
+                            <text x="207" y="278" text-anchor="middle" fill="#d6ddcf" font-family="Georgia, serif" font-size="16" letter-spacing="2">LI WEI</text>
+                            <text x="684" y="265" text-anchor="middle" fill="#d6ddcf" font-family="Arial, sans-serif" font-size="9" letter-spacing="1">VIEW</text>
+                            <rect x="355" y="145" width="180" height="9" rx="4" fill="#101b17" stroke="#839386" stroke-width="2"/>
+                            <circle cx="154" cy="178" r="5" fill="#d9ded0"/><circle cx="746" cy="178" r="5" fill="#d9ded0"/>
+                            <path d="M148 328h604" stroke="#78907e" stroke-width="2" opacity="0.42"/>
+                        </g>
+                    </svg>
+                    <figure class="photo-print" id="machine-photo" aria-hidden="true">
+                        <img src="fun.png" alt="Portrait photograph from the camera's photo roll">
+                        <figcaption>ONE FRAME · ONE MOMENT</figcaption>
+                    </figure>
+                    <span class="camera-flash" aria-hidden="true"></span>
+                    <button class="camera-shutter" id="machine-switch" type="button" aria-pressed="false" aria-label="Take a photo">
+                        <span class="shutter-button"></span>
+                        <span class="shutter-caption">SHOT</span>
+                    </button>
+                </div>
+            </div>
+            <div class="machine-readout">
+                <p id="machine-status" role="status" aria-live="polite">Ready when you are.</p>
+                <p class="machine-counter"><span id="switch-count">00</span><span>SHOTS TAKEN</span></p>
+            </div>
+        </section>
+        <p class="machine-footnote">A portrait in, a portrait out. Photography has peaked.</p>
+    </main>
+
+    <footer id="site-footer">
+        <div class="footer-main">
+            <div class="footer-about">
+                <a class="footer-brand" href="index.html">Learning by doing</a>
+                <p>A notebook on light, photographs, and the moments between frames.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <a href="index.html">Home</a>
+                <a href="quotes.html">Quotes</a>
+                <a href="project.html">Projects</a>
+                <a href="machine.html">Machine</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <address class="footer-contact">
+                <span class="footer-label">SAY HELLO</span>
+                <a href="mailto:3128735611@qq.com">3128735611@qq.com</a>
+            </address>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Li Wei. Built with care.</p>
+            <a href="#site-header">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+    </footer>
+
+    <script src="nav.js" defer></script>
+    <script src="machine.js" defer></script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

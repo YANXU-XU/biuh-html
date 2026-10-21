@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Get in touch — email, location, and social links.">
+    <meta name="description" content="Get in touch about photography, creative projects, and photo walks.">
     <title>Contact · Learning by doing</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
@@ -43,6 +43,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="quotes.html">Quotes</a></li>
                 <li><a href="project.html">Projects</a></li>
+                <li><a href="machine.html">Machine</a></li>
                 <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
             </ul>
         </nav>
@@ -62,30 +63,40 @@
         </button>
     </header>
 
-    <main>
-        <h1>Get In Touch</h1>
+    <main class="contact-page">
+        <div class="contact-intro">
+            <p class="contact-eyebrow">LET'S TALK PHOTOGRAPHY <span>·</span> 01</p>
+            <h1>Let's Make a Frame</h1>
         <p class="lead">
-            Have a question, an idea, or just want to say hi? Drop me a message below.
+            Have a photo idea, a project to discuss, or a place worth exploring? Send me a note.
         </p>
+        </div>
 
         <div class="contact-layout">
             <aside class="contact-info">
                 <div class="info-card reveal">
                     <h2>Email</h2>
-                    <p><a href="mailto:student@example.com">student@example.com</a></p>
+                    <p><a href="mailto:3128735611@qq.com">3128735611@qq.com</a></p>
                 </div>
                 <div class="info-card reveal">
                     <h2>Location</h2>
                     <p>BIUH campus</p>
                 </div>
                 <div class="info-card reveal">
-                    <h2>Social</h2>
-                    <p><a href="#" target="_blank" rel="noopener">Photography portfolio online</a></p>
+                    <h2>Portfolio</h2>
+                    <p>A collection of photographs is in the works.</p>
                 </div>
             </aside>
 
             <section class="contact-form-wrap reveal">
-                <h2>Send a Message</h2>
+                <div class="form-heading">
+                    <div>
+                        <p class="contact-eyebrow">YOUR NOTE</p>
+                        <h2>Send a Note</h2>
+                    </div>
+                    <span class="form-mark" aria-hidden="true">↗</span>
+                </div>
+                <p class="form-intro">Tell me about the scene, idea, or project you have in mind.</p>
                 <form id="contact-form" novalidate>
                     <div class="form-row">
                         <label for="name">Name</label>
@@ -97,14 +108,14 @@
                     <div class="form-row">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" required
-                               autocomplete="email" placeholder="you@example.com">
+                               autocomplete="email" placeholder="3128735611@qq.com">
                         <span class="error" data-for="email"></span>
                     </div>
 
                     <div class="form-row">
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" required minlength="10"
-                                  placeholder="Write your message..."></textarea>
+                                  placeholder="What would you like to photograph?"></textarea>
                         <span class="error" data-for="message"></span>
                     </div>
 
@@ -116,7 +127,27 @@
     </main>
 
     <footer id="site-footer">
-        <p>&copy; <span id="year"></span> Learning by doing · Built with &hearts;</p>
+        <div class="footer-main">
+            <div class="footer-about">
+                <a class="footer-brand" href="index.html">Learning by doing</a>
+                <p>A notebook on light, photographs, and the moments between frames.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <a href="index.html">Home</a>
+                <a href="quotes.html">Quotes</a>
+                <a href="project.html">Projects</a>
+                <a href="machine.html">Machine</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <address class="footer-contact">
+                <span class="footer-label">SAY HELLO</span>
+                <a href="mailto:3128735611@qq.com">3128735611@qq.com</a>
+            </address>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Li Wei. Built with care.</p>
+            <a href="#site-header">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
     </footer>
 
     <script src="nav.js" defer></script>
